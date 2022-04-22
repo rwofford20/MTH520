@@ -1,19 +1,21 @@
 # python_intro.py
 """Python Essentials: Introduction to Python.
-<Name>
-<Class>
-<Date>
+Rachel Wofford
+MTH 520
+April 22, 2022
 """
 
 #Problem 1
 def isolate(a, b, c, d, e):
-
-    raise NotImplementedError("Problem 1 Incomplete")
+    """Prints the first 3 arguments separated by 5 spaces and the 
+    remaining arguments separated by 1 space."""
+    print(a,b,c,sep="     ", end=" "),print(d,e)
+    return
 
 #Problem 2
 def first_half(string):
-
-    raise NotImplementedError("Problem 2 Incomplete")
+    half_length = round(len(string)/2)
+    return string[:half_length]
 
 
 def backward(first_string):
@@ -74,5 +76,12 @@ def prob8():
     diagonally) in the grid.
     """
     raise NotImplementedError("Problem 8 Incomplete")
+    
+if __name__=='__main__':
+    #Call the function for Problem 1
+    isolate(1,2,3,4,5)
+    
+    #Call the function for Problem 2
+    print(first_half('carrot'))
 
 

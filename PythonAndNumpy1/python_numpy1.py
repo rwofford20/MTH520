@@ -29,8 +29,10 @@ def sphere_volume(r):
     
 
 #Problem 4 - Matrix multiplication in NumPy.
-def prob4(A,B):
+def prob4():
     """Return the product of two matrices A and B."""
+    A = np.array([[3, -1, 4],[1, 5, -9]])
+    B = np.array([[2, 6, -5, 3], [5, -8, 9, 7], [9, -3, -2, -3]])
     AB = np.dot(A,B)  #Could also us (A @ B) for matrix multiplication
     return AB
     
@@ -43,18 +45,19 @@ def tax_liability(i):
         bracket2 = 3630   #Next $30249.99 taxed at 12%
         bracket3 = (i - 40125.01)*.22  #Remaining income taxed at 22%
         liability = bracket1+bracket2+bracket3  
-        print("Tax liability: ", round(liability,2))
+        #print("Tax liability: ", round(liability,2))
     elif i > 9875: #Executes if income is between 9875.01 and 40125 (inclusive)
         bracket1 = 987.5  #First $9875 taxed at 10%
         bracket2 = (i - 9875)*.12  #Remmaining income taxed at 12%
         liability = bracket1+bracket2
-        print("Tax liability: ", round(liability,2))
+        #print("Tax liability: ", round(liability,2))
     elif i>= 0:  #Executes if income is $9875 or less
         bracket1 = i * 0.10  #Income taxed at 10%
         liability = bracket1
-        print("Tax liability: ", round(liability, 2))
+        #print("Tax liability: ", round(liability, 2))
     else: 
-        print("Error")
+        liability = 0
+    return liability
 
 
 #Problem 6 - Matrix operations using NumPy and lists.
@@ -89,15 +92,13 @@ if __name__=='__main__':
     print("The volume of a sphere with radius ", radius, " is: ", sphere_volume(radius))
     
     print(" "),print("Problem 4")
-    #Define matrices A and B as NumPy arrays and call the function for problem 4.
-    A = np.array([[3, -1, 4], [1, 5, -9]])
-    B = np.array([[2, 6, -5, 3], [5, -8, 9, 7], [9, -3, -2, -3]])
-    print("AB = ", prob4(A,B))
+    #Call the function for problem 4.
+    print("AB = ", prob4())
     
     print(" "),print("Problem 5")
     #Define an income and call the function for problem 5.
     income = 63000
-    tax_liability(income)
+    print('Tax liability: ', round(tax_liability(income),2))
     
     print(" "),print("Problem 6")
     #Call both functions for problem 6
