@@ -4,7 +4,6 @@
 <MTH 520>
 <April 14, 2020>
 """
-from math import sqrt
 
 def sum(a,b):
     """Returns the sum of a and b."""

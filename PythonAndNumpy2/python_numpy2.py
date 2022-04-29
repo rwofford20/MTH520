@@ -4,6 +4,8 @@ Rachel Wofford
 MTH 520
 April 22, 2022
 """
+from math import floor 
+import numpy as np
 
 #Problem 1
 def isolate(a, b, c, d, e):
@@ -14,25 +16,51 @@ def isolate(a, b, c, d, e):
 
 #Problem 2
 def first_half(string):
-    half_length = round(len(string)/2)
+    """Returns the first half of parameter 'string', excluding the middle character 
+    if there is an odd number of characters."""
+    half_length = floor(len(string)/2)
     return string[:half_length]
 
 
 def backward(first_string):
-
-    raise NotImplementedError("Problem 2 Incomplete")
+    """Returns parameter 'first_string' with the order of its characters reversed."""
+    new_string = ''
+    for i in range(len(first_string)):
+        new_string += first_string[-i-1]
+    return new_string
+    
 
 #Problem 3
 def list_ops():
-
-    raise NotImplementedError("Problem 3 Incomplete")
+    """Defines a list, performs manipulations, and returns the resulting list."""
+    #Define the list
+    my_list = ['bear', 'ant', 'cat', 'dog']
+    #Append 'eagle'
+    my_list.append('eagle')
+    #Replace the entry at index 2 with 'fox
+    my_list[2]='fox'
+    #Remove the entry at index 1
+    my_list.pop(1)
+    #Sort the list in reverse alphabetical order
+    my_list.sort()
+    my_list.reverse()
+    #Replace 'eagle with 'hawk
+    k = my_list.index('eagle')
+    my_list[k]='hawk'
+    #Add 'hunter to the last entry in the list
+    my_list[-1] = my_list[-1] + ' hunter'
+    
+    return my_list
+    
 
 #Problem 4
 def alt_harmonic(n):
     """Return the partial sum of the first n terms of the alternating
     harmonic series. Use this function to approximate ln(2).
     """
-    raise NotImplementedError("Problem 4 Incomplete")
+    harmonic_sum = sum([(1/i)*((-1)**(i+1)) for i in range (1,n+1)])
+    return harmonic_sum
+    
 
 
 
@@ -42,10 +70,13 @@ def prob5(A):
 
     Example:
         >>> A = np.array([-3,-1,3])
-        >>> prob4(A)
+        >>> prob5(A)
         array([0, 0, 3])
     """
-    raise NotImplementedError("Problem 5 Incomplete")
+    B = np.copy(A)
+    mask = B < 0
+    B[mask] = 0
+    return B
 
 def prob6():
     """Define the matrices A, B, and C as arrays. Return the block matrix
@@ -55,7 +86,17 @@ def prob6():
     where I is the 3x3 identity matrix and each 0 is a matrix of all zeros
     of the appropriate size.
     """
-    raise NotImplementedError("Problem 6 Incomplete")
+    #Define the matrices A,B, and C
+    A = (np.arange(6).reshape(3,2)).T
+    B = np.tril(np.full((3,3),3), -1)+np.diag([3,3,3])
+    C = np.diag([-2, -2, -2])
+    #Stack each column of the block matrix
+    col1 = np.vstack((np.zeros((3,3)), A, B))
+    col2 = np.vstack((A.T, np.zeros((5,2))))
+    col3 = np.vstack((np.eye(3), np.zeros((2,3)), C))
+    #Stack the columns together horizontally
+    block_matrix = np.hstack((col1,col2,col3))
+    return block_matrix
 
 def prob7(A):
     """Divide each row of 'A' by the row sum and return the resulting array.
@@ -81,7 +122,9 @@ if __name__=='__main__':
     #Call the function for Problem 1
     isolate(1,2,3,4,5)
     
-    #Call the function for Problem 2
-    print(first_half('carrot'))
+    #Call the function for Problem 4 to approximate ln(2) to 5 decimal places
+    print(alt_harmonic(500000))
+    
+    
 
 

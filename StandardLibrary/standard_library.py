@@ -5,6 +5,7 @@
 <April 9, 2020>
 """
 import calculator as calc
+from math import sqrt
 from itertools import combinations, chain
 
 # Problem 1
@@ -78,7 +79,7 @@ def hypot(a, b):
     a_squared = calc.product(a,a)
     b_squared = calc.product(b,b)
     c_squared = calc.sum(a_squared, b_squared)
-    c = calc.sqrt(c_squared)
+    c = sqrt(c_squared)
     return(c)
     
 
@@ -93,9 +94,13 @@ def power_set(A):
     Returns:
         (list(sets)): The power set of A as a list of sets.
     """
-    A_list = list(A)
-    sets=chain.from_iterable(combinations(A_list, n) for n in range(len(A_list)+1))
-    return list(sets)
+    #A_list = list(A)
+    #sets=chain.from_iterable(set(combinations(A_list, n)) for n in range(len(A_list)+1))
+    sets = []
+    for n in range(len(A)+1):
+        for combo in combinations(A,n):
+            sets.append(set(combo))
+    return sets
 
 
 # Problem 5: Implement shut the box.
@@ -105,3 +110,6 @@ def shut_the_box(player, timelimit):
 if __name__=='__main__':
     #Call the function for Problem 2
     prob2()
+    print(hypot(3,4))
+    A = ['a','b','c']
+    print(power_set(A))
