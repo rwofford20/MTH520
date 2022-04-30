@@ -108,7 +108,10 @@ def prob7(A):
                [ 0.        ,  1.        ,  0.        ],
                [ 0.33333333,  0.33333333,  0.33333333]])
     """
-    raise NotImplementedError("Problem 7 Incomplete")
+    #Use broadcasting by adding an extra dimension
+    A = A/A.sum(axis=1)[:,np.newaxis]
+           
+    return A
 
 
 def prob8():
@@ -116,7 +119,7 @@ def prob8():
     adjacent numbers in the same direction (up, down, left, right, or
     diagonally) in the grid.
     """
-    raise NotImplementedError("Problem 8 Incomplete")
+    #No file "grid.npy" is available from PythonEssentials
     
 if __name__=='__main__':
     #Call the function for Problem 1
@@ -125,6 +128,9 @@ if __name__=='__main__':
     #Call the function for Problem 4 to approximate ln(2) to 5 decimal places
     print(alt_harmonic(500000))
     
+    #Define a matrix a call the function for Problem 7
+    A = np.array([[1,1,0],[0,1,0],[1,1,1]])
+    print(prob7(A))
     
 
 
