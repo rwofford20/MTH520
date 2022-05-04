@@ -31,3 +31,26 @@ Comments:
 
 -------------------------------------------------------------------------------
 
+05/04/22 22:03
+
+Problem 1 (10 points):
+Score += 10
+
+Problem 2 (10 points):
+Score += 10
+
+Problem 3 (10 points):
+Score += 10
+
+Problem 4 (10 points):
+Score += 10
+
+Code Quality (10 points):
+Score += 10
+
+Total score: 50/50 = 100.0%
+
+Excellent!
+
+-------------------------------------------------------------------------------
+
