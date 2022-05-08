@@ -48,7 +48,7 @@ def list_ops():
     k = my_list.index('eagle')
     my_list[k]='hawk'
     #Add 'hunter to the last entry in the list
-    my_list[-1] = my_list[-1] + ' hunter'
+    my_list[-1] = my_list[-1] + 'hunter'
     
     return my_list
     
