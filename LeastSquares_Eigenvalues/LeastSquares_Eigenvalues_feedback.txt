@@ -1,0 +1,18 @@
+05/13/22 17:50
+
+Problem 1 (15 points):
+AttributeError: module 'WoffordRachel.LeastSquares_Eigenvalues.lstsq_eigs' has no attribute 'least_squares'
+
+Problem 2 (15 points):
+AttributeError: module 'WoffordRachel.LeastSquares_Eigenvalues.lstsq_eigs' has no attribute 'line_fit'
+
+Problem 3 (15 points):
+AttributeError: module 'WoffordRachel.LeastSquares_Eigenvalues.lstsq_eigs' has no attribute 'polynomial_fit'
+
+Code Quality (5 points):
+NotImplementedError: least_squares() not found
+
+Total score: 0/50 = 0.0%
+
+-------------------------------------------------------------------------------
+
