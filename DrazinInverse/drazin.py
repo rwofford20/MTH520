@@ -161,4 +161,4 @@ if __name__=='__main__':
     #print(drazin_inverse(A, tol=1e-4))
     
     # Test case for Problem 3
-    print(effective_resistance(A))
+    #print(effective_resistance(A))
