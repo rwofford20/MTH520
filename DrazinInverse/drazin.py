@@ -1,8 +1,8 @@
 # drazin.py
 """Volume 1: The Drazin Inverse.
-<Name>
-<Class>
-<Date>
+Rachel Wofford
+MTH 520 
+May 20, 2022
 """
 
 import numpy as np
@@ -37,6 +37,18 @@ def index(A, tol=1e-5):
 
     return k
 
+# Laplace function for problem 3.
+def laplacian(A):
+    """Compute the Laplacian matrix of the adjacency matrix A, 
+        as well as the second smallest eigenvalue.
+        
+        Parameters: A((n,n) ndarray): Adjacency matrix for an undirected weighted graph.
+        
+        Returns: L((n,n) ndarray): The Laplacian matrix of A.
+    """
+    D = A.sum(axis=1) #The degree of each vertes(either axis).
+    return np.diag(D)-A
+    
 
 # Problem 1
 def is_drazin(A, Ad, k):
@@ -50,8 +62,25 @@ def is_drazin(A, Ad, k):
     Returns:
         (bool) True of Ad is the Drazin inverse of A, False otherwise.
     """
-    raise NotImplementedError("Problem 1 Incomplete")
-
+    conditions = 0
+    
+    # Check if the first condition holds
+    if np.allclose(A@Ad,Ad@A):
+        conditions += 1
+    
+    # Check if the second condition holds
+    if np.allclose(np.linalg.matrix_power(A, k+1)@Ad, np.linalg.matrix_power(A, k)):
+        conditions += 1
+    
+    # Check if the third condition holds
+    if np.allclose(Ad@A@Ad, Ad):
+        conditions += 1
+    
+    # If all conditions hold return true, otherwise return false
+    if conditions == 3:
+        return True
+    else:
+        return False
 
 # Problem 2
 def drazin_inverse(A, tol=1e-4):
@@ -63,8 +92,26 @@ def drazin_inverse(A, tol=1e-4):
     Returns:
        ((n,n) ndarray) The Drazin inverse of A.
     """
-    raise NotImplementedError("Problem 2 Incomplete")
-
+    n = len(A[:])
+    # Sort the Schur decomposition with 0 eigenvalues last
+    f1 = lambda x: abs(x) > tol
+    T1, Q1, k1 = la.schur(A, sort=f1)
+    
+    # Sort the Schur decomposition with 0 eigenvalues first
+    f2 = lambda x: abs(x) <= tol
+    T2, Q2, k2 = la.schur(A, sort=f2)
+    
+    # Create change of basis matrix 
+    U = np.hstack((Q1[:,:k1], Q2[:,:n-k1]))
+    
+    # Find the block diagonal matrix
+    V = la.inv(U)@A@U
+    Z = np.zeros((n,n))
+    if k1 != 0:
+        Minv = la.inv(V[:k1, :k1])
+        Z[:k1,:k1] = Minv
+    return U@Z@la.inv(U)
+    
 
 # Problem 3
 def effective_resistance(A):
@@ -77,51 +124,41 @@ def effective_resistance(A):
         ((n,n) ndarray) The matrix where the ijth entry is the effective
         resistance from node i to node j.
     """
-    raise NotImplementedError("Problem 3 Incomplete")
+    
+    # Determine n and prepare to calculate R
+    n = len(A[:])
+    R = np.zeros((n,n), dtype=int)
+    
+    for i in range(n):
+        # Calculate the Laplacian of A
+        L = laplacian(A)
+        I = np.eye(n)
+
+        # Replace the ith row of the Laplacian with the ith row of the identity matrix
+        L[i]=I[i]
+        print(L)
+        # Calculate the Drazin inverse
+        D = drazin_inverse(L, tol=1e-4)
+        # Change the values according to equation 14.4 if i !=j
+        for j in range(n):
+            if i != j:
+                R[i,j] = D[i,i]
+    return R
 
 
-# Problems 4 and 5
-class LinkPredictor:
-    """Predict links between nodes of a network."""
-
-    def __init__(self, filename='social_network.csv'):
-        """Create the effective resistance matrix by constructing
-        an adjacency matrix.
-
-        Parameters:
-            filename (str): The name of a file containing graph data.
-        """
-        raise NotImplementedError("Problem 4 Incomplete")
-
-
-    def predict_link(self, node=None):
-        """Predict the next link, either for the whole graph or for a
-        particular node.
-
-        Parameters:
-            node (str): The name of a node in the network.
-
-        Returns:
-            node1, node2 (str): The names of the next nodes to be linked.
-                Returned if node is None.
-            node1 (str): The name of the next node to be linked to 'node'.
-                Returned if node is not None.
-
-        Raises:
-            ValueError: If node is not in the graph.
-        """
-        raise NotImplementedError("Problem 5 Incomplete"
-
-
-    def add_link(self, node1, node2):
-        """Add a link to the graph between node 1 and node 2 by updating the
-        adjacency matrix and the effective resistance matrix.
-
-        Parameters:
-            node1 (str): The name of a node in the network.
-            node2 (str): The name of a node in the network.
-
-        Raises:
-            ValueError: If either node1 or node2 is not in the graph.
-        """
-        raise NotImplementedError("Problem 5 Incomplete")
+if __name__=='__main__':
+    # Test cases for Problem 1
+    A = np.array([[1,3,0,0], [0,1,3,0], [0,0,1,3], [0,0,0,0]])
+    Ad = np.array([[1,-3,9,81],[0,1,-3,-18],[0,0,1,3],[0,0,0,0]])
+    k1 = 1
+    #print(is_drazin(A, Ad, k1))
+    B = np.array([[1,1,3],[5,2,6],[-2,-1,-3]])
+    Bd = np.array([[0,0,0],[0,0,0],[0,0,0]])
+    k2 = 3
+    #print(is_drazin(B, Bd, k2))
+    
+    # Test case for Problem 2
+    #print(drazin_inverse(A, tol=1e-4))
+    
+    # Test case for Problem 3
+    print(effective_resistance(A))
