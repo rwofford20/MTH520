@@ -43,3 +43,31 @@ Great job!
 
 -------------------------------------------------------------------------------
 
+05/20/22 17:29
+
+Problem 1 (10 points):
+Score += 10
+
+Problem 2 (10 points):
+Score += 10
+
+Problem 3 (10 points):
+Score += 10
+
+Problem 4 (5 points):
+Score += 5
+
+Problem 6 (10 points):
+prob6() plot does not match specifications
+Should be Z = (np.sin(X)*np.sin(Y))/(X*Y)
+Score += 5
+
+Code Quality (5 points):
+Score += 5
+
+Total score: 45/50 = 90.0%
+
+Great job!
+
+-------------------------------------------------------------------------------
+
