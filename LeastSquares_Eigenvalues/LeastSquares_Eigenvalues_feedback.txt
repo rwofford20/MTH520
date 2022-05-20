@@ -16,3 +16,25 @@ Total score: 0/50 = 0.0%
 
 -------------------------------------------------------------------------------
 
+05/20/22 17:43
+
+Problem 1 (15 points):
+Score += 15
+
+Problem 2 (15 points):
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/rachelwofford/PythonEssentials/LeastSquares_Eigenvalues/housing.npy'
+
+Problem 3 (15 points):
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/rachelwofford/PythonEssentials/LeastSquares_Eigenvalues/housing.npy'
+
+Code Quality (5 points):
+Score += 5
+
+Total score: 20/50 = 40.0%
+
+
+Comments:
+	remove full path for loaded files
+
+-------------------------------------------------------------------------------
+
