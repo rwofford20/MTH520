@@ -127,22 +127,22 @@ def effective_resistance(A):
     
     # Determine n and prepare to calculate R
     n = len(A[:])
-    R = np.zeros((n,n), dtype=int)
+    R = np.zeros((n,n), dtype=np.float)
+    I = np.eye(n)
     
     for i in range(n):
         # Calculate the Laplacian of A
         L = laplacian(A)
-        I = np.eye(n)
 
         # Replace the ith row of the Laplacian with the ith row of the identity matrix
-        L[i]=I[i]
-        print(L)
+        L[i,:]=I[i,:]
+        #print(L)
         # Calculate the Drazin inverse
         D = drazin_inverse(L, tol=1e-4)
         # Change the values according to equation 14.4 if i !=j
         for j in range(n):
             if i != j:
-                R[i,j] = D[i,i]
+                R[j,i] = D[j,j]
     return R
 
 
